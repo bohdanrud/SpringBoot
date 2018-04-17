@@ -44,6 +44,12 @@ public class HomeController {
 		model.addAttribute("studentModel", new Student());
 		model.addAttribute("countries", countryService.findAllCountries());
 		
-		return "";
+		return "add-student";
+	}
+	
+	@PostMapping("/add-student")
+	public String saveStudent(@ModelAttribute("studentModel") Student student) {
+		studentService.saveStudent(student);
+		return "redirect:/";
 	}
 }
