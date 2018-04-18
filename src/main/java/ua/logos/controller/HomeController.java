@@ -63,4 +63,9 @@ public class HomeController {
 		studentService.saveStudent(student);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/filmsDatabase/films-home")
+	public String showFilmsDatabaseHome() {
+		return "/filmsDatabase/films-home";
+	}
 }
