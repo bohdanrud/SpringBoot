@@ -3,11 +3,12 @@ package ua.logos.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ua.logos.entity.Category;
 import ua.logos.repository.CategoryRepository;
 import ua.logos.service.CategoryService;
-
+@Service
 public class CategoryServiceImpl implements CategoryService{
 
 	@Autowired
