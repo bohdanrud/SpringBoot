@@ -1,7 +1,13 @@
 package ua.logos.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -24,4 +30,8 @@ public class Film extends BaseEntity{
 	
 	@Column(name = "category_id")
 	private int categoryId;
+	
+	@ManyToMany
+	@JoinTable(name = "film_actor", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
+	private List<Actor> actors = new ArrayList<>();
 }
