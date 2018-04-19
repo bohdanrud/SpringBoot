@@ -68,4 +68,28 @@ public class HomeController {
 	public String showFilmsDatabaseHome() {
 		return "/filmsDatabase/films-home";
 	}
+	
+	@GetMapping("/students")
+	public String showAllStudents(Model model) {
+		model.addAttribute("studentsList", studentService.findAllStudents());
+		return "";
+	}
+	
+	@GetMapping("/generate/random")
+	public String generateStudents() {
+		for(int i = 0; i<=500; i++) {
+			Student student = new Student();
+			student.setFullName("Student" + i + "Full" + (i-1) + " " + "Name#" + i);
+			student.setAge(35);
+			student.setEmail("stugent@gmail.com");
+			
+			Country country = new Country();
+			country.setName("Country#" + i);
+			countryService.saveCountry(country);
+			
+			student.setCountry(country);
+			studentService.saveStudent(student);
+		}
+		return "redirect:/";
+	}
 }
