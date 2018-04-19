@@ -2,6 +2,7 @@ package ua.logos.service;
 
 import java.util.List;
 
+import ua.logos.domain.SimpleFilter;
 import ua.logos.entity.Student;
 
 public interface StudentService {
@@ -11,5 +12,7 @@ public interface StudentService {
 	Student findStudentById(int id);
 	
 	List<Student> findAllStudents();
+	
+	List<Student> findAllStudentsByFilter(SimpleFilter filter);
 	
 }
