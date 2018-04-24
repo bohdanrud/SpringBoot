@@ -9,8 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import ua.logos.domain.SimpleFilter;
 import ua.logos.entity.Country;
 import ua.logos.entity.Student;
 import ua.logos.service.CountryService;
@@ -72,7 +74,20 @@ public class HomeController {
 	@GetMapping("/students")
 	public String showAllStudents(Model model) {
 		model.addAttribute("studentsList", studentService.findAllStudents());
-		return "";
+		return "students";
+	}
+	
+	@GetMapping("/students/search")
+	public String showStudentsByFilter(Model model, 
+			@RequestParam(value ="search", required =false) String search) {
+		SimpleFilter filter = null;
+
+		if(search != null) {
+			filter = new SimpleFilter(search);
+		}
+		model.addAttribute("studentsList", studentService.findAllStudentsByFilter(filter));
+		
+		return "students";
 	}
 	
 	@GetMapping("/generate/random")
