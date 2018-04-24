@@ -12,7 +12,53 @@
 </head>
 <body>
 
+	<c:url var="firstUrl" value="/students/students-by-page?page=0"/>
+	<c:url var="lastUrl" value="/students/students-by-page?page=${ studentsList.totalPages - 1}"/>
+	<c:url var="nextUrl" value="/students/students-by-page?page=${ currentIndex + 1 }"/>
+	<c:url var="prevUrl" value="/students/students-by-page?page=${ currentIndex - 1 }"/>
+	
 <div class="container">
+
+	<div class="row">
+		<ul class="pagination">
+			<c:choose>
+				<c:when test="${ currentIndex == 0}">
+					<li class="disabled"><a href="#">&lt;&lt;</a></li>
+					<li class="disabled"><a href="#">&lt;</a></li>
+					<li class="active"><a href="${ firstUrl }">1</a></li>
+				</c:when>
+				
+				<c:otherwise>
+					<li><a href="${ firstUrl }">&lt;&lt;</a></li>
+					<li><a href="${ prevUrl }">&lt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+				<c:url var="pageUrl" value="/students/students-by-page?page=${ i }"/>
+					<c:choose>
+						<c:when test="${ i == currentIndex }">
+							<li class="active"><a href="#">${ i + 1 }</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="${ pageUrl }">${ i + 1 }</a></li>
+						</c:otherwise>
+					</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test=" ${ currentIndex == studentsList.totalPages - 1}">
+					<li class="disabled"><a href="#">&gt;</a></li>
+					<li class="disabled"><a href="#">&gt;&gt;</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${ nextUrl }">&gt;</a></li>
+					<li><a href="${ lastUrl }">&gt;&gt;</a></li>
+				</c:otherwise>
+			</c:choose>
+			
+		</ul>
+	</div>
+
 	<div class="row">
 		<table class="table table-bordered"> 
 			<thead>

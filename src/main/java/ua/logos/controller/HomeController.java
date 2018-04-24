@@ -116,7 +116,18 @@ public class HomeController {
 			Model model,
 			@PageableDefault Pageable pageable) {
 		Page<Student> page = studentService.findStudentByPage(pageable);
+		
+		int currentPage = page.getNumber();
+		int begin = Math.max(1, currentPage-5);
+		int end = Math.min(begin + 5, page.getNumber());
+		model.addAttribute("beginIndex", begin);
+		model.addAttribute("endIndex", end);
+		model.addAttribute("currentIndex", currentPage);
+		
+		model.addAttribute("studentsList", page);
 		model.addAttribute("studentsListByPageSize", page.getContent());
 		return "student-pages";
 	}
+	
+	
 }
