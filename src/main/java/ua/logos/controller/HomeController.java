@@ -3,6 +3,9 @@ package ua.logos.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -106,5 +109,14 @@ public class HomeController {
 			studentService.saveStudent(student);
 		}
 		return "redirect:/";
+	}
+	
+	@GetMapping("/students/students-by-page")
+	public String showStudentsPageble(
+			Model model,
+			@PageableDefault Pageable pageable) {
+		Page<Student> page = studentService.findStudentByPage(pageable);
+		model.addAttribute("studentsListByPageSize", page.getContent());
+		return "student-pages";
 	}
 }

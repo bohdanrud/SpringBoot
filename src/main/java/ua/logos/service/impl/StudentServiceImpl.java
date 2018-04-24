@@ -61,7 +61,7 @@ public class StudentServiceImpl implements StudentService {
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				// TODO Auto-generated method stub
 				if(filter.getSearch().isEmpty()) return null;
-					
+				
 				return cb.like(root.get("fullName"), "%" + filter.getSearch() + "%");
 				
 			}
