@@ -8,10 +8,7 @@
 </head>
 <body>
 
-	<form action="/upload-file" method="post" enctype="multipart/form-data">
-		<input type="file" name="uploadFile"> <br>
-		<input type="submit" value="Upload image"> <br>
-	</form>
+<img src="data:image/png;base64, ${ imageSrc }">
 
 </body>
 </html>

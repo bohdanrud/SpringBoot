@@ -7,9 +7,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
-import javassist.bytecode.ByteArray;
 
 public final class CustomFileUtils {
 
@@ -40,6 +41,20 @@ public final class CustomFileUtils {
 			ImageIO.write(image, "png", destination);
 			
 		}
+	}
+	
+	public static String getImage(String folderName, String image) throws IOException {
+		
+		File file = null;
+		byte[] encodFileToByte = null;
+		String encodedFile = null;
+		
+		if(image != null || image !="") {
+			file = new File(ROOT_PATH + SEPARATOR + folderName + SEPARATOR + image);
+		}
+		encodFileToByte = Base64.encodeBase64(FileUtils.readFileToByteArray(file));
+		encodedFile = new String(encodFileToByte);
+		return encodedFile;
 	}
 	
 }
